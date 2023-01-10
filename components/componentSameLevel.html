@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div id="app">
+    <app-header v-bind:propsdata="num"></app-header>
+<!--    <app-header v-bind:프롭스 속성 이름="상위 컴포넌트의 데이터 이름"></app-header>-->
+    <app-content v-on:pass="deliverNum(value)"></app-content>
+    {{ str }}
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+
+<script>
+    let appHeader = {
+        template: '<div>header</div>',
+        // template 문법은 데이터 바인딩 {{}} / 디렉티브로 나뉜다. v-속성 으로 화면조작
+        props:['propsdata']
+    }
+    let appContent = {
+        template: '<div>content<button v-on:click="passNum">pass</button>></div>',
+        methods: {
+            passNum: function () {
+                this.$emit('pass', 10)
+            }
+        }
+    }
+
+    new Vue({
+        el: '#app',
+        data: {
+            str: 'hi',
+            num: 0
+        },
+        components: {
+            'app-header': appHeader,
+            'app-content': appContent
+        },
+        methods: {
+            deliverNum: function (value) {
+                this.num = value;
+            }
+        }
+    });
+</script>
+</body>
+</html>

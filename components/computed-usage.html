@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .colorW {
+            color: #e22b65;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <!--    <p v-bind:class="{colorW:isError}"></p>-->
+    <p v-bind:class="errorTextColor">hi</p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            isError: false
+        },
+        computed: {
+            errorTextColor: function () {
+                // return isError ? 'colorW' : null;
+
+                if (isError) {
+                    return 'colorW'
+                } else {
+                    return null;
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>

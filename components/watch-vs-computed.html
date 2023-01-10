@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div id="app">
+    {{ num }}
+    <button v-on:click="addNum">increase</button>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            num: 10
+        },
+        computed: {
+            // 단순한 값에 대한 계산
+            doubleNum: function () {
+                return this.num * 2;
+            }
+        },
+        watch: {
+            // 매번 실행되는게 부담스러운 로직들 => 데이터 요청 같은 것들
+            // 넘버값에 따라서 다시 데이터를 불러오는 로직
+            num: function (newValue, oldValue) {
+                this.fetchUserByNumber(newValue);
+            }
+        },
+        methods: {
+            fetchUserByNumber: function (num) {
+                // console.log(num);
+                axios.get(num);
+            }
+        }
+    })
+</script>
+</body>
+</html>
